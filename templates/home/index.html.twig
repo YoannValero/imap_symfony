@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<style>
+
+</style>
+<div class="container-fluid mt-3">
+
+    <h1 class="mb-5">Liste des messages non répondu</h1>
+        <table class="table table-hover table-striped">
+            <tr>
+                <th>De</th>
+                <th>Pour</th>
+                <th>Sujet du mail</th>
+                <th>Date de réception</th>
+                <th>Délai de réponse</th>
+                <th>Date de réponse max</th>
+                <th>Délai restant</th>
+                <th></th>
+                
+            </tr>
+
+            {% for mail in mails %}
+                
+            {# <pre>
+                {{ dump(mail.date|date_modify("+5 day")|date('Y-m-d h:m:s')) }}
+                {{ dump(('now'|date('Y-m-d h:m:s'))) }}
+            </pre> #}
+            {# <pre>
+                {{ dump( mail.date|date_modify("+4 day")|date('Y-m-d H:m:s') > ('now')|date('Y-m-d H:m:s'),  mail.date|date_modify("+4 day")|date('Y-m-d H:m:s') , ('now')|date('Y-m-d H:m:s')  ) }}
+            </pre> #}
+                <tr {% if mail.date|date_modify("+4 day")|date('Y-m-d H:m:s') < ('now')|date('Y-m-d H:m:s') %} style='background-color:#ff7f73;' {% else %}   style='background-color:#b1dfb1;'{% endif %}>
+                    <td><strong> {{ mail.from}}</strong></td>
+                    <td ><strong>{% for destinataires in mail.to %} {{ destinataires }}, {% endfor %} </strong></td>
+                    <td><strong>{{ mail.subject }}</strong></td>
+                    <td>{{ mail.date|date('d/m/Y à h:m')}}</td>
+                    <td>4 jours</td>
+                    <td>
+                        {{ mail.date|date_modify("+4 day")|date('d/m/Y à h:m') }}
+                    </td>
+                    <td>
+                        {% if mail.date|date_modify("+4 day")|date('Y-m-d H:m:s') < ('now')|date('Y-m-d H:m:s') %}
+                            <p>Délai dépassé</p>
+                        {% else %}
+
+                        {% set difference = date('now').diff(date(mail.date)) %}
+                        {% set leftDays = difference.days %}
+                        
+                        {{ leftDays|date('d')}} jour(s)
+                            {# Nb jour restant = {{ (('now')|date('Y-m-d h:m:s')) - (mail.date|date_modify("+5 day")|date('Y-m-d h:m:s')) }} #}
+                            {# {{ 'now'|date('d/m/Y') }} #}
+                        {% endif %}
+                    </td>
+                    <td><a class='btn btn-secondary' href="{{ path('get_mail', { mail_id : mail.message_id}) }}" >Consulter</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+            {# <p>{{ mail.to is iterable ? mail.to|keys : ""}}</p> #}
+          
+  
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="border p-3">
+                <p>De : <strong> {{ mail.fromAddress}}</strong></p>
+                <p>Pour :<small>{% for destinataires in mail.to %} {{ destinataires }}, {% endfor %} </small></p>
+                <p>Sujet : <strong>{{ mail.subject }}</strong></p>
+                <hr>    
+                <p>Contenu du message <br> </p>
+                <iframe src="{{ path('display_mail_iframe', { mail_id: mail.id}) }}" width='100%' height='600' frameborder="0"></iframe>
+        </div>
+    </div>
+{% endblock %}

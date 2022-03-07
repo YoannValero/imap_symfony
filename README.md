@@ -1,12 +1,10 @@
 # Test de connexion imap avec symfony 5
 
-```sh
-composer install
-```
+## Uncomment .dist extension and set .env environment variable
 
 ## Bundle secit-pl/imap-bundle
 
-- Edit config/packages/imap.yaml
+- Create **imap.yaml** file in config/packages/
 ```yaml
 imap:
     connections:
@@ -14,6 +12,11 @@ imap:
             mailbox: "{localhost:143}INBOX"
             username: "email@example.com"
             password: "password"
-            attachments_dir: "%kernel.root_dir%/../var/imap/attachments"
+            # Optional
+            # attachments_dir: "%kernel.root_dir%/../var/imap/attachments"
             server_encoding: "UTF-8"
+```
+
+```sh
+composer install
 ```

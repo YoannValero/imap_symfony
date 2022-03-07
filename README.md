@@ -1,8 +1,12 @@
+# Test de connexion imap avec symfony 5
+
 ```sh
 composer install
 ```
 
-Edit config/packages/imap.yaml
+## Bundle secit-pl/imap-bundle
+
+- Edit config/packages/imap.yaml
 ```yaml
 imap:
     connections:

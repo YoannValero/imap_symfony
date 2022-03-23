@@ -1,4 +1,4 @@
-# Test de connexion imap avec symfony 5
+# Test imap symfony 5
 
 ## Uncomment .dist extension and set .env environment variable
 

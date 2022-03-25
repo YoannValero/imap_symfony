@@ -1,6 +1,6 @@
 # Test de connexion imap avec symfony 5
 
-## Uncomment .dist extension and set .env environment variable
+## Uncomment .local extension and set .env environment variable
 
 ## Bundle secit-pl/imap-bundle
 
